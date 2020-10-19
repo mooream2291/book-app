@@ -22,3 +22,5 @@ function createSearch(req, res) {
 app.listen(PORT, ()=> {
   console.log(`listening on ${PORT}`);
 });
+
+app.get('/Hello World');
