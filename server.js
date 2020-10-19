@@ -34,3 +34,15 @@ app.get('/searches/new', (request, response) => {
   response.render('pages/searches/new.ejs');
 });
 
+// function Book {
+//   this.title = 
+//   this.author = 
+// };
+
+// const greeting = 'hello' + person.object ? person.name: 'person' 
+
+// this.bookArt = obj.art ? obj.art: '/default.png'
+
+
+
+
