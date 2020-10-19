@@ -6,6 +6,8 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.urlencoded({ extended: true}));
+app.use(express.static('./public'));
+//loading css after page load//
 app.set('view engine', 'ejs');
 app.post('/searches', createSearch);
 
@@ -23,4 +25,12 @@ app.listen(PORT, ()=> {
   console.log(`listening on ${PORT}`);
 });
 
-app.get('/Hello World');
+app.get('/hello', (request, response) => {
+  response.render('pages/index.ejs');
+}
+);
+
+app.get('/searches/new', (request, response) => {
+  response.render('pages/searches/new.ejs');
+});
+
