@@ -3,9 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>newBookArr</title>
 </head>
 <body>
-    
+    <ul>
+        <% results.forEach(book => { %>
+        <li>
+        <h1><%= book.title %></h1>
+        <h2><%= book.author %></h2>
+        <h3><%= book.description %></h3>
+        <img src='<%= book.coverArt %>'>
+        </li>
+        <% }) %>
+      </ul>
 </body>
 </html>
