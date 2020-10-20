@@ -4,17 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>newBookArr</title>
+    <link rel="stylesheet" href="/styles/layout.css">
 </head>
 <body>
+    <main>
+    <h1>Best Books!</h1>
+    <h2>Search Results</h2>
     <ul>
         <% results.forEach(book => { %>
         <li>
-        <h1><%= book.title %></h1>
-        <h2><%= book.author %></h2>
-        <h3><%= book.description %></h3>
         <img src='<%= book.coverArt %>'>
+        <h3><%= book.title %></h3>
+        <h4><%= book.author %></h4>
+        <h5><%= book.description %></h5>
         </li>
         <% }) %>
       </ul>
+    </main>
 </body>
 </html>
