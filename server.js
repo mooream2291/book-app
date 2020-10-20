@@ -27,7 +27,7 @@ function createSearch(req, res) {
       const newBookArr = data.body.items.map(book => {
         return new Book(book);
       });
-      res.json(newBookArr);
+      res.render('pages/searches/show.ejs', {results: newBookArr});
     });
 }
 app.get('/hello', (req, res) => {
