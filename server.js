@@ -27,7 +27,11 @@ function createSearch(req, res) {
       const newBookArr = data.body.items.map(book => {
         return new Book(book);
       });
-      res.render('pages/searches/show.ejs', {results: newBookArr});
+      res.render('pages/searches/show', {results: newBookArr});
+    })
+    .catch((error) => {
+      console.log('ERROR', error);
+      res.status(500).render('pages/searches/error');
     });
 }
 app.get('/hello', (req, res) => {
@@ -45,10 +49,11 @@ function Book(data){
   }
   this.coverArt = coverArt;
 }
-app.get('/searches/new', (request, response) => {
-  response.render('pages/searches/new.ejs');
+app.get('/searches/new', (req, res) => {
+  res.render('pages/searches/new.ejs');
 //.get, or .post, that string is the URL, it goes into the URL bar to determine what to do, only use specific file when using render method
 });
 app.listen(PORT, ()=> {
   console.log(`listening on ${PORT}`);
 });
+
