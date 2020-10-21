@@ -6,15 +6,16 @@
     <title>Document</title>
     <link rel="stylesheet" href="/styles/base.css">
 </head>
+<!-- saved.png wireframe -->
 <body>
     <h1>Homepage</h1>
         <h2>search</h2>
         <h2>Saved</h2>
         <p>
-            <%= savedBooks.length %>
+            <%= book_table.length %>
         </p>
             <ul>
-                <% savedBooks.forEach(book => { %>
+                <% book_table.forEach(book => { %>
                 <li>
                     <img src='<%= book.coverArt %>'>
                     <h3><%= book.title %></h3>
