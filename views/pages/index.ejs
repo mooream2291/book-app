@@ -7,6 +7,26 @@
     <link rel="stylesheet" href="/styles/base.css">
 </head>
 <body>
+<<<<<<< HEAD
+    <h1>Homepage</h1>
+        <h2>search</h2>
+        <h2>Saved</h2>
+        <p>
+            <%= savedBooks.length %>
+        </p>
+            <ul>
+                <% savedBooks.forEach(book => { %>
+                <li>
+                    <img src='<%= book.coverArt %>'>
+                    <h3><%= book.title %></h3>
+                    <h4><%= book.author %></h4>
+                    <h5><%= book.description %></h5>
+                </li>
+                <% })%>
+            </ul>
+</body>
+=======
     <h1>Hello World</h1>
     </body>
+>>>>>>> e56ea88f34aab9f7e69dcb0b7c9fe62a9b1bf894
 </html>

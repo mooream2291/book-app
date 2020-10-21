@@ -3,6 +3,9 @@
 const express = require('express');
 const superagent = require('superagent');
 const app = express();
+const pg = require('pg');
+
+const client = new pg.Client(process.env.DATABASE_URL);
 const PORT = process.env.PORT || 3000;
 
 app.use(express.urlencoded({ extended: true}));
@@ -11,6 +14,13 @@ app.use(express.static('./public'));
 app.set('view engine', 'ejs');
 app.post('/searches', createSearch);
 //represents URL that the user is going to//
+app.get('/index', (req, res) => {
+  const sql = 'SELECT * FROM savedBooks';
+  client.query(sql)
+    .then(results => {
+      res.render('pages/index', {'savedBooks': results.rows});
+    });
+});
 
 function createSearch(req, res) {
   let url = 'https://www.googleapis.com/books/v1/volumes?q=';
@@ -34,9 +44,6 @@ function createSearch(req, res) {
       res.status(500).render('pages/searches/error');
     });
 }
-app.get('/hello', (req, res) => {
-  res.render('pages/index.ejs');
-});
 
 function Book(data){
   this.author = data.volumeInfo.authors ? data.volumeInfo.authors: 'Unavailable';
@@ -56,4 +63,3 @@ app.get('/searches/new', (req, res) => {
 app.listen(PORT, ()=> {
   console.log(`listening on ${PORT}`);
 });
-
