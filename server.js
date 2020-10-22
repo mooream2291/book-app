@@ -37,12 +37,12 @@ app.get('/books/:id', (req, res) => {
   console.log(sql);
   client.query(sql)
     .then(results => {
-      //.rows is an array of the rwos that are a result of my sql statement postgres puts objects intoa  table and this is asking for the rows the table//
+      //.rows is an array of the rows that are a result of my sql statement postgres puts objects intoa  table and this is asking for the rows the table//
       res.render('pages/books/detail', {book: results.rows[0]});
     })
     .catch(error => console.log(error));
 });
-app.post('/addnewbook', saveBook);
+app.post('/addNewBook', saveBook);
 function saveBook(req, res) {
 //INSERT SQL statement//
 //anything posting to form data needs to be req.body
