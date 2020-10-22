@@ -4,9 +4,14 @@ const express = require('express');
 const superagent = require('superagent');
 const app = express();
 const pg = require('pg');
+require('dotenv').config();
 
 const client = new pg.Client(process.env.DATABASE_URL);
-const PORT = process.env.PORT || 3000;
+//this line gives an error from pg//
+client.on('error', err => {
+  return console.error(err);
+});
+const PORT = process.env.PORT || 3001;
 
 app.use(express.urlencoded({ extended: true}));
 app.use(express.static('./public'));
@@ -16,7 +21,7 @@ app.set('view engine', 'ejs');
 app.post('/searches', createSearch);
 //represents URL that the user is going to//
 app.get('/index', (req, res) => {
-  const sql = 'SELECT * FROM book_table';
+  const sql = 'SELECT * FROM book_table;';
   client.query(sql)
     .then(results => {
       res.render('pages/index', {'book_table': results.rows});
@@ -28,7 +33,7 @@ app.get('/books/:id', (req, res) => {
   console.log('trying to get single book');
 //request.params.id (id comes from key in books.sql (which is our database) id is a unique value given to each object by postgres node)
   const id = req.params.id;
-  const sql = `SELECT * FROM book_table WHERE id=${id}`;
+  const sql = `SELECT * FROM book_table WHERE id=${id};`;
   console.log(sql);
   client.query(sql)
     .then(results => {
@@ -37,7 +42,21 @@ app.get('/books/:id', (req, res) => {
     })
     .catch(error => console.log(error));
 });
-// app.post('/getNewBook');
+app.post('/addnewbook', saveBook);
+function saveBook(req, res) {
+//INSERT SQL statement//
+//anything posting to form data needs to be req.body
+  console.log(req.body);
+  let sql = 'INSERT INTO  book_table (image_url, title, author, description, isbn, bookshelf) VALUES ($1, $2, $3, $4, $5, $6);';
+  let storageVal = [req.body.imageLinks, req.body.title, req.body.authors, req.body.description, req.body.industryIdentifiers, req.body.categories];
+  client.query(sql, storageVal)
+  //query: making a request to our database to get a result from the sql request//
+    .then(()=> {
+      res.render('pages/books/detail', {book: new Book(req.body)});
+      //response: response from either database or API is sent to the user//
+    });
+//render to detail//
+}
 //app.post to add to database from select this book button on wireframe//
 //do a client.query call the res.render will display on page.//
 
@@ -54,7 +73,7 @@ function createSearch(req, res) {
     .then(data => {
       console.log('google books data:', data.body.items);
       const newBookArr = data.body.items.map(book => {
-        return new Book(book);
+        return new Book(book.volumeInfo);
       });
       //whatever I for each through is what i want to render in my route//
       res.render('pages/searches/show', {results: newBookArr});
@@ -66,12 +85,12 @@ function createSearch(req, res) {
 }
 
 function Book(data){
-  this.author = data.volumeInfo.authors ? data.volumeInfo.authors: 'Unavailable';
-  this.title = data.volumeInfo.title ? data.volumeInfo.title: 'Unavailable';
-  this.description = data.volumeInfo.description ? data.volumeInfo.description: 'Unavailable';
-  this.isbn = data.volumeInfo. industryIdentifiers ? data.volumeInfo. industryIdentifiers: 'Unavailable';
-  this.bookShelf = data.volumeInfo.categories ? data.volumeInfo.categories: 'Unavailable';
-  let coverArt = data.volumeInfo.imageLinks ? data.volumeInfo.imageLinks.thumbnail: 'https://i.imgur.com/J5LVHEL.jpg';
+  this.author = data.authors ? data.authors: 'Unavailable';
+  this.title = data.title ? data.title: 'Unavailable';
+  this.description = data.description ? data.description: 'Unavailable';
+  this.isbn = data.industryIdentifiers ? (data.industryIdentifiers[0].identifier ? data.industryIdentifiers[0].identifier: data.industryIdentifiers): 'Unavailable';
+  this.bookShelf = data.categories ? data.categories: 'Unavailable';
+  let coverArt = data.imageLinks ? (data.imageLinks.thumbnail ? data.imageLinks.thumbnail: data.imageLinks): 'https://i.imgur.com/J5LVHEL.jpg';
 
   if (coverArt.slice(0, 5) !== 'https') {
     coverArt = 'https' + coverArt.slice(4,coverArt.length);
