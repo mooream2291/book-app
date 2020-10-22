@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS book_table;
+
 
 CREATE TABLE IF NOT EXISTS book_table (
   id SERIAL PRIMARY KEY,
