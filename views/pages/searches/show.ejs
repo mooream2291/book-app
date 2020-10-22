@@ -19,7 +19,17 @@
         <h3><%= book.title %></h3>
         <h4><%= book.author %></h4>
         <h5><%= book.description %></h5>
-        <
+      <form id="create-form" action="/addNewbook" method="post">
+          <fieldset>
+              <button type="submit">Select this book</button>
+              <input type="hidden" value="<%= book.coverArt %>"name="imageLinks">
+              <input type="hidden" value="<%= book.title %>"name="title">
+              <input type="hidden" value="<%= book.author %>"name="authors">
+              <input type="hidden" value="<%= book.description%>"name="description">
+              <input type="hidden" value="<%= book.isbn %>"name="industryIdentifiers">
+              <input type="hidden" value="<%= book.bookshelf %>"name="categories">
+          </fieldset>
+      </form>
         </li>
         <% }) %>
       </ul>

@@ -16,34 +16,23 @@
 </head>
 <body>
     <header></header>
-
-    <main>
-        <h2>Select this book</h2>
-        <form id="create-form" action="/addNewbook" method="post">
-        </form>
-            <ul>
-                <% results.forEach(book => { %>
-                <li>
+    <main>      
+            <div>
                 <img src='<%= book.coverArt %>'>
                 <h3><%= book.title %></h3>
                 <h4><%= book.author %></h4>
                 <h5><%= book.description %></h5>
                 <h5><%= book.isbn %></h5>
-                <h5><%= book.bookShelf %></h5>
-                <
-                </li>
-                <% }) %>
+                <h5><%= book.bookshelf %></h5>
+            </div>
     </main>
-    need to be able to click from show.ejs and get decirected to this page from that selection
+    <!-- need to be able to click from show.ejs and get decirected to this page from that selection
 
 
     server needs to have app.get for this page
 
-    pass in current book
 
-
-</body>
-
+    pass in current book -->
 
 </body>
 
