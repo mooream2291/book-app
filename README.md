@@ -2,7 +2,7 @@
 
 # Book App
 
-**Author**: Ashley Moore, dora blakey diana
+**Author**: Ashley Moore, dora blakey
 **Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
 
 ## Overview
