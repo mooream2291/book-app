@@ -29,7 +29,7 @@ app.get('/index', (req, res) => {
 });
 //pulls everything in from API into database when user puts in search info//
 //when there is a piece of data after books (denoted by colon) save this piece of information using request.params//
-app.get('/books/:id', (req, res) => {
+app.get('/books/:id', (req, res) => { //for ticket 4 change arrow functions to a function expression (46 is an example)//
   console.log('trying to get single book');
 //request.params.id (id comes from key in books.sql (which is our database) id is a unique value given to each object by postgres node)
   const id = req.params.id;
