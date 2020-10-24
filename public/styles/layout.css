@@ -1,11 +1,11 @@
 .container {
     display: flex;
     flex-direction: column; 
-    border: solid black;
+
 }
 /* inside container */
 * {
-    border: solid black;
+    background-color: rgb(235, 219, 218);
 }
 
 h1 {
