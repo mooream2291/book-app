@@ -1,0 +1,13 @@
+<form id="create-form" action="/addNewBook" method="post">
+    <fieldset>
+        <button type="submit">Update</button>
+        <input value="<%= book.coverArt %>"name="imageLinks">
+        <input value="<%= book.title %>"name="title">
+        <input value="<%= book.author %>"name="authors">
+        <input value="<%= book.description%>"name="description">
+        <input value="<%= book.isbn %>"name="industryIdentifiers">
+        <input value="<%= book.bookshelf %>"name="categories">
+    </fieldset>
+</form>
+
+<!-- //thursdays lab video//change post to put and method override once logic is in server.js file -->

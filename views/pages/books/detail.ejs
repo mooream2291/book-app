@@ -1,11 +1,23 @@
-
-            <section>
-                <img src='<%= book.coverArt %>'>
-                <h3><%= book.title %></h3>
-                <h4><%= book.author %></h4>
-                <h5><%= book.description %></h5>
-                <h5><%= book.isbn %></h5>
-                <h5><%= book.bookshelf %></h5>
-            </section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('../../layout/head.ejs') %>
+    <title>Details</title>
+</head>
+<body>
+    <section>
+        <img src='<%= book.coverArt %>'>
+        <h3><%= book.title %></h3>
+        <h4><%= book.author %></h4>
+        <h5><%= book.description %></h5>
+        <h5><%= book.isbn %></h5>
+        <h5><%= book.bookshelf %></h5>
+    </section>
+    <%- include('../../layout/edit.ejs', {book: book}) %>
+</body>
+</html>
 
             <!-- implement a button to return to the homepage -->
+            <!-- THIS WILL HAVE IT'S OWN SQL STATEMENT TO UPDATE -->
